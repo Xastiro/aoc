@@ -14,4 +14,4 @@ calories.slice_before{ |e| e.nil? }.map(&:compact).each do |calorie|
   elves_loadout << calorie.map(&:to_i).sum
 end
 
-print elves_loadout.max
+print elves_loadout.max(3).sum
