@@ -1,11 +1,9 @@
 require 'csv'
 
-calories= []
+calories = []
 
-CSV.foreach("first_challenge_input.csv") do |row|
-  unless row.nil?
-    calories << row[0]
-  end
+CSV.foreach('challenge_input.csv') do |row|
+  calories << row[0] unless row.nil?
 end
 
 elves_loadout = []
