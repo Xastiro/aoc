@@ -12,37 +12,25 @@ rearrangement_procedure = inputs.slice(inputs.find_index([]) + 1, inputs.length)
 stacks = Array.new(10){Array.new}
 
 stacks_of_crates.each do |stack|
-  stacks[1] << stack[0][0..2]
-  stacks[2] << stack[0][4..6]
-  stacks[3] << stack[0][8..10]
-  stacks[4] << stack[0][12..14]
-  stacks[5] << stack[0][16..18]
-  stacks[6] << stack[0][20..22]
-  stacks[7] << stack[0][24..26]
-  stacks[8] << stack[0][28..30]
-  stacks[9] << stack[0][32..34]
+  (1..9).each do |i|
+    stacks[i] << stack[0][(i - 1) * 4..2 + (i - 1) * 4]
+  end
 end
-  stacks = stacks.map { |e| e.reject { |c| c == "   " }.compact()}
+stacks = stacks.map { |e| e.reject { |c| c == "   " }.compact()}
 
- class String
-  def string_between_markers marker1, marker2
-    self[/#{Regexp.escape(marker1)}(.*?)#{Regexp.escape(marker2)}/m, 1]
+class String
+  def chars_between before, after
+    self[/#{Regexp.escape(before)}(.*?)#{Regexp.escape(after)}/m, 1]
   end
 end
 
-times = 0
-origin = 0
-destination = 0
-
 rearrangement_procedure.each do |procedure|
-  times = procedure[0].string_between_markers("move ", " from ")
-  origin = procedure[0].string_between_markers(" from ", " to ")
-  destination = procedure[0][-1]
+  times = procedure[0].chars_between("move ", " from ").to_i
+  origin = procedure[0].chars_between(" from ", " to ").to_i
+  destination = procedure[0][-1].to_i
 
-  stacks[destination.to_i] = stacks[destination.to_i] + stacks[origin.to_i].last(times.to_i)
-  stacks[origin.to_i].pop(times.to_i)
-
-
+  stacks[destination] = stacks[destination] + stacks[origin].last(times)
+  stacks[origin].pop(times)
 end
 
 stacks.each do |stack|
