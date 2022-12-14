@@ -1,5 +1,4 @@
 require 'csv'
-require 'matrix'
 
 program = []
 
@@ -12,7 +11,6 @@ program.map! { |row| row.split(' ') }
 cycle = 0
 signal_strength = 1
 sum_signal_strength = 0
-
 
 def cycle_check(cycle, signal_strength, sum_signal_strength)
   case cycle
@@ -32,7 +30,6 @@ def cycle_check(cycle, signal_strength, sum_signal_strength)
     sum_signal_strength
   end
 end
-
 
 program.each do |instruction|
 

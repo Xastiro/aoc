@@ -6,40 +6,33 @@ CSV.foreach('challenge_input.csv') do |row|
   diagnostic_report << row[0]
 end
 
-sums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-diagnostic_report.each do |binary_number|
-  binary_number.split('').each_with_index do |bit, index|
-    sums[index] += 1 if bit == '1'
-  end
-end
-
-oxygen_generator_rating = diagnostic_report
-
-12.times do |index|
-  bit_criteria = sums[index] >= oxygen_generator_rating.length / 2 ? '0' : '1'
-
-  new_oxygen_generator_rating = []
-  oxygen_generator_rating.each do |binary_number|
-    new_oxygen_generator_rating << binary_number if binary_number[index] == bit_criteria
-  end
-
-  oxygen_generator_rating = new_oxygen_generator_rating
-  sums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-  oxygen_generator_rating.each do |binary_number|
-    binary_number.split('').each_with_index do |bit, bit_index|
-      sums[bit_index] += 1 if bit == '1'
+def sum(diagnostic_report, index)
+  sum = 0
+  diagnostic_report.each do |binary_number|
+    binary_number.split('').each_with_index do |bit, i|
+      sum += 1 if bit == '1' && index == i
     end
   end
-  p oxygen_generator_rating.length
-  p sums
+  p sum
 end
 
+def bit_criteria(report, sum)
+  sum >= report.length - sum ? '1' : '0'
+end
 
-p oxygen_generator_rating
+report = diagnostic_report
 
+(0..11).each do |index|
+  p index
+  t_report = []
+  if report.length == 1
+    b_c = bit_criteria(report, sum(report, index))
+    report.each do |binary_number|
+      t_report << binary_number if binary_number[index] == b_c
+    end
+    report = t_report
+    return oxygen_generator_rating = report
+  end
+end
 
-p "100111101110".to_i(2)
-p "001011000101".to_i(2)
-p "100111101110".to_i(2) * "001011000101".to_i(2)
+p oxygen_generator_rating.to_i(2) * co2_scrubber_rating.to_i(2)

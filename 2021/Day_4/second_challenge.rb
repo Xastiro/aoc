@@ -7,8 +7,8 @@ CSV.foreach('challenge_input.csv') do |row|
 end
 
 draws = bingo_subsystem[0].map(&:to_i)
-boards = bingo_subsystem.drop(1).reject { |row| row == []}.map { |row| row[0].split(' ').map(&:to_i).map { |number| {value: number, marked: false}}}.each_slice(5).to_a
-boards = boards.map { |board| {grid: board, won: false}}
+boards = bingo_subsystem.drop(1).reject { |row| row == [] }.map { |row| row[0].split(' ').map(&:to_i).map { |number| { value: number, marked: false } } }.each_slice(5).to_a
+boards = boards.map { |board| { grid: board, won: false } }
 
 def board_score(board, draw)
   sum = 0

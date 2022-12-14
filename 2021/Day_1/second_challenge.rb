@@ -3,7 +3,7 @@ require 'csv'
 depths = []
 
 CSV.foreach('challenge_input.csv') do |row|
-  depths << row[0] unless row.nil?
+  depths << row[0]
 end
 
 windows = []

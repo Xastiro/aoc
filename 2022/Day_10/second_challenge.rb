@@ -1,5 +1,4 @@
 require 'csv'
-require 'matrix'
 
 program = []
 
@@ -19,42 +18,42 @@ def draw_crt(cycle, sprite_position, crt)
     if (cycle - 1).between?(sprite_position - 1, sprite_position + 1)
       crt[0] << '#'
     else
-      crt[0] << '.'
+      crt[0] << ' '
     end
   end
   if cycle.between?(41, 80)
     if (cycle - 41).between?(sprite_position - 1, sprite_position + 1)
       crt[1] << '#'
     else
-      crt[1] << '.'
+      crt[1] << ' '
     end
   end
   if cycle.between?(81, 120)
     if (cycle - 81).between?(sprite_position - 1, sprite_position + 1)
       crt[2] << '#'
     else
-      crt[2] << '.'
+      crt[2] << ' '
     end
   end
   if cycle.between?(121, 160)
     if (cycle - 121).between?(sprite_position - 1, sprite_position + 1)
       crt[3] << '#'
     else
-      crt[3] << '.'
+      crt[3] << ' '
     end
   end
   if cycle.between?(161, 200)
     if (cycle - 161).between?(sprite_position - 1, sprite_position + 1)
       crt[4] << '#'
     else
-      crt[4] << '.'
+      crt[4] << ' '
     end
   end
   if cycle.between?(201, 240)
     if (cycle - 201).between?(sprite_position - 1, sprite_position + 1)
       crt[5] << '#'
     else
-      crt[5] << '.'
+      crt[5] << ' '
     end
   end
 end
